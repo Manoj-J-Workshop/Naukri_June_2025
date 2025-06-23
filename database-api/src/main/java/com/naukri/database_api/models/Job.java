@@ -30,9 +30,6 @@ public class Job {
     @Column(name = "Job Description", nullable = false)
     String fullDescription;
 
-    @ManyToOne
-    AppUser createdBy; //This is the recruiter who created the job
-
     @CreationTimestamp
     @Column(name = "Posted_On", nullable = false)
     LocalDateTime postedDate;
@@ -42,6 +39,9 @@ public class Job {
 
 //    @OneToMany
 //    Company company;
+
+    @ManyToOne
+    AppUser createdBy; //This is the recruiter who created the job
 
     @OneToOne
     Application_Form application_form;

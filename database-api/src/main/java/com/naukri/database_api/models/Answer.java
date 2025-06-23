@@ -17,6 +17,7 @@ public class Answer {
     UUID id;
 
     String answer;
+
     @ManyToOne
     Questions question;
 }

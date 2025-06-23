@@ -18,8 +18,8 @@ public class Application_Form {
     @GeneratedValue(strategy =GenerationType.AUTO)
     UUID Application_id;
 
-    @OneToOne
-    Job job;
+//    @OneToOne
+//    Job job;
 
     @ManyToMany
     List<Questions> questionsList;

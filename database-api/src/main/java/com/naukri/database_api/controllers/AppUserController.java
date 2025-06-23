@@ -23,7 +23,7 @@ public class AppUserController {
     @PostMapping("/save")
     public ResponseEntity createUser(@RequestBody AppUser User){
         appUserRepository.save(User); // Id property will not be set --> shall create new record inside user tbl
-        return new ResponseEntity(User, HttpStatus.CREATED);
+        return new ResponseEntity<>(User, HttpStatus.CREATED);
     }
 
     @GetMapping("/getuserbyId/{id}")
@@ -37,12 +37,12 @@ public class AppUserController {
         // Id property will be set --> shall update existing record inside user tbl
         // If Record is not found will create a new record
         appUserRepository.save(user);
-        return new ResponseEntity(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteUser(@PathVariable UUID id){
         appUserRepository.deleteById(id);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -18,10 +18,10 @@ import java.util.UUID;
 public class AppUser {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
-     @Column(nullable = false, unique = true)
+     //@Column(nullable = false, unique = true)
      UUID id;
 
-     @Column(nullable = false)
+     //@Column(nullable = false)
      String name;
 
      @Column(name = "user_email",unique = true, nullable = false)
