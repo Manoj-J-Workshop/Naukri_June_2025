@@ -21,15 +21,24 @@ public class SkillsController {
         this.skillsRepository = skillsRepository;
     }
 
+//    @PostMapping("/add")
+//    public ResponseEntity<Skills> addSkills(@RequestBody Skills skills){
+//        skillsRepository.save(skills);
+//        return new ResponseEntity<>(skills, HttpStatus.CREATED);
+//    }
     @PostMapping("/add")
-    public ResponseEntity<Skills> addSkills(Skills skills){
+    public ResponseEntity<Skills> addSkills(@RequestBody Skills skills){
+        if (skills.getSkillName() == null || skills.getSkillName().isBlank()) {
+            throw new IllegalArgumentException("skillName cannot be null or blank");
+        }
         skillsRepository.save(skills);
         return new ResponseEntity<>(skills, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/get/{SkillName}")
     public ResponseEntity<Skills> getSkillsByName(@PathVariable String SkillName){
-        Skills skills = skillsRepository.findByName(SkillName);
+        Skills skills = skillsRepository.findBySkillName(SkillName);
         return new ResponseEntity<>(skills,HttpStatus.OK);
     }
 

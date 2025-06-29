@@ -16,6 +16,7 @@ public class Skills {
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID skill_Id;
 
-    String skill_name;
+    @Column(name="skill_name")
+    String skillName; //skill_name;
 
 }

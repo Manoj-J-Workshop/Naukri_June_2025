@@ -18,17 +18,28 @@ public class SkillService {
         this.databaseApiConnectors = databaseApiConnectors;
     }
 
+
     public List<Skills> getAllSkills(List<String> SkillsNames){
         List<Skills> skillsList =  new ArrayList<>();
-        for(int i=0; i < SkillsNames.size(); i++){
 
+        if (SkillsNames == null || SkillsNames.isEmpty()) {
+            return skillsList;   // avoid NPE
+        }
+
+        for(int i = 0; i < SkillsNames.size(); i++) {
             String skillName = SkillsNames.get(i);
-            // Need to get Skills object from skillName
             Skills skill = this.getSkillByName(skillName);
             skillsList.add(skill);
-
         }
         return skillsList;
+    }
+
+
+    public Skills createSkillByName(String SkillName){
+        Skills skill = new Skills();
+        skill.setSkillName(SkillName);
+        //call DB API connector to save skill in DB
+        return databaseApiConnectors.callSaveSkillEndpoint(skill);
     }
 
     public Skills getSkillByName(String skillName){
@@ -37,6 +48,10 @@ public class SkillService {
         // we need to get Skills(class object) from database api on the basis of skillName (String)
         // we need to call DB api from here.
         Skills skill = databaseApiConnectors.callGetSkillsByNameEndpoint(skillName);
+        if(skill == null){
+            // skill came as null, that skill does not exsist in DB, so we need to create skill in the skill tbl
+            return this.createSkillByName(skillName);
+        }
         return skill;
 
     }

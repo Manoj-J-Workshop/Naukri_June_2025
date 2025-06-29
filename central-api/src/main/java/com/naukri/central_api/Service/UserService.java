@@ -1,5 +1,6 @@
 package com.naukri.central_api.Service;
 
+import com.naukri.central_api.connectors.DatabaseApiConnectors;
 import com.naukri.central_api.dto.JobSeekerRegistrationDTO;
 import com.naukri.central_api.models.AppUser;
 import com.naukri.central_api.models.Skills;
@@ -14,11 +15,13 @@ public class UserService {
 
     SkillService skillService;
     MappingUtility mappingUtility;
+    DatabaseApiConnectors dbApiConnectors;
 
     @Autowired
-    public UserService(SkillService skillService, MappingUtility mappingUtility){
+    public UserService(SkillService skillService, MappingUtility mappingUtility, DatabaseApiConnectors dbApiConnectors){
         this.skillService = skillService;
         this.mappingUtility = mappingUtility;
+        this.dbApiConnectors = dbApiConnectors;
     }
 
     public AppUser registerJobSeeker(JobSeekerRegistrationDTO jobSeekerDTO){
@@ -33,8 +36,8 @@ public class UserService {
         return user;
     }
 
-    public Appuser saveUser(AppUser user){
+    AppUser saveUser(AppUser user){
         // This method will be having logic to call Save user endpoint of appuser controller of DB api
-
+        return dbApiConnectors.callSaveUserEndpoint(user);
     }
 }

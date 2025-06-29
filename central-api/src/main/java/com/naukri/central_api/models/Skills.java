@@ -11,6 +11,6 @@ import java.util.UUID;
 @ToString
 public class Skills {
     UUID skill_Id;
-    String skill_name;
+    String skillName;
 
 }
